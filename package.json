@@ -17,6 +17,7 @@
     "autoprefixer": "10.4.20",
     "bcrypt": "^5.1.1",
     "clsx": "^2.1.1",
+    "kafkajs": "^2.2.4",
     "next": "latest",
     "next-auth": "5.0.0-beta.30",
     "postcss": "8.5.1",
@@ -36,7 +37,8 @@
     "@types/react-dom": "19.0.3",
     "baseline-browser-mapping": "^2.9.19",
     "eslint": "^9.39.2",
-    "eslint-config-next": "^16.1.6"
+    "eslint-config-next": "^16.1.6",
+    "tsx": "^4.21.0"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
