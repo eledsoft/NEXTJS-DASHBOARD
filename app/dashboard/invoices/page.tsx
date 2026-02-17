@@ -9,6 +9,7 @@ import { Suspense } from 'react';
 import { fetchInvoicesPages } from '@/app/lib/data';
 import { getRelatives } from '@/app/dal/relatives';
 import { Metadata } from 'next';
+import RelativesBadge from '@/app/ui/relativies/RelativesBadge';
  
 export const metadata: Metadata = {
   title: 'Invoices',
@@ -33,8 +34,13 @@ export default async function Page(props: {
       <div className="flex w-full items-center justify-between">
         <h1 className={`${lusitana.className} text-2xl`}>Invoices</h1>
       </div>
+      {/* SERVER: dato letto via getRelatives() con "use cache" */}
       <div className="mt-2 rounded-md bg-blue-50 p-3 text-sm text-blue-700">
-        Hai <span className="font-bold">{relatives.length}</span> parenti registrati
+        (Server) Hai <span className="font-bold">{relatives.length}</span> parenti registrati
+      </div>
+      {/* CLIENT: dato letto via useRelatives() dal Context — zero fetch, interattivo */}
+      <div className="mt-2">
+        <RelativesBadge />
       </div>
       <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
         <Search placeholder="Search invoices..." />

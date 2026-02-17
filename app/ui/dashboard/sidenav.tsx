@@ -15,18 +15,11 @@ export default async function SideNav() {
   //add route protection to this component, so
   //user should be redirected based on user roles. (consider if better in auth.config.ts))
 
-
-
 // in un Server Component o Server Action
 const session = await auth();
-
-session?.user?.name   // "User"
-session?.user?.email  // "user@nextmail.com"
 session?.user?.image  // undefined nel tuo caso
 
-
  // in un Server Component o Server Action
-  //const { userId } = await verifySession();
 let relatives = [];
   if (session?.user?.id) {
     relatives = await getRelatives( );
