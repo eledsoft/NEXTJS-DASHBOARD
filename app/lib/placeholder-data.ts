@@ -7,6 +7,18 @@ const users = [
     email: 'user@nextmail.com',
     password: '123456',
   },
+  {
+    id: '410544b2-5201-4288-9855-fec4b6a6336c',
+    name: 'Mario',
+    email: 'mario@nextmail.com',
+    password: '123456',
+  },
+  {
+    id: '3958dc9e-712f-4377-85e9-fec4b6a6442b',
+    name: 'Laura',
+    email: 'laura@nextmail.com',
+    password: '123456',
+  },
 ];
 
 const customers = [
@@ -144,4 +156,48 @@ const revenue = [
   { month: 'Dec', revenue: 4800 },
 ];
 
-export { users, customers, invoices, revenue };
+const relatives = [
+  {
+    id: '550e8400-e29b-41d4-a716-446655440001',
+    name: 'Giuseppe',
+    lastname: 'Rossi',
+    age: 65,
+    relationship: 'padre',
+    related_to: '410544b2-4001-4271-9855-fec4b6a6442a', // user
+  },
+  {
+    id: '550e8400-e29b-41d4-a716-446655440002',
+    name: 'Maria',
+    lastname: 'Rossi',
+    age: 62,
+    relationship: 'madre',
+    related_to: '410544b2-5201-4288-9855-fec4b6a6336c', // Mario
+  },
+  {
+    id: '550e8400-e29b-41d4-a716-446655440003',
+    name: 'Giovanni',
+    lastname: 'Rossi',
+    age: 35,
+    relationship: 'fratello',
+    related_to: '410544b2-5201-4288-9855-fec4b6a6336c', // Mario
+  },
+  {
+    id: '550e8400-e29b-41d4-a716-446655440004',
+    name: 'Anna',
+    lastname: 'Bianchi',
+    age: 58,
+    relationship: 'madre',
+    related_to: '3958dc9e-712f-4377-85e9-fec4b6a6442b', // Laura
+  },
+  {
+    id: '550e8400-e29b-41d4-a716-446655440005',
+    name: 'Luca',
+    lastname: 'Bianchi',
+    age: 28,
+    relationship: 'cugino',
+    related_to: '3958dc9e-712f-4377-85e9-fec4b6a6442b', // Laura
+  },
+];
+
+
+export { users, customers, invoices, revenue , relatives};

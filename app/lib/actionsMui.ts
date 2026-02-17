@@ -1,14 +1,12 @@
 'use server';
 
-import postgres from 'postgres';
+import { sql } from '@/app/lib/db';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { invoiceFormSchema } from '@/app/lib/validations';
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
 import { sendInvoiceCreatedEvent, sendInvoiceUpdatedEvent, sendInvoiceDeletedEvent } from '@/lib/kafka/events';
-
-const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
 export type State = {
   errors?: {

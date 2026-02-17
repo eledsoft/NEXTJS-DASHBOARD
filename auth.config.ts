@@ -5,6 +5,20 @@ export const authConfig = {
     signIn: '/login',
   },
 callbacks: {
+    jwt({ token, user }) {
+      // Al primo login, salva l'id nel JWT token
+      if (user) {
+        token.id = user.id;
+      }
+      return token;
+    },
+    session({ session, token }) {
+      // Espone l'id nella sessione leggibile con auth()
+      if (token.id) {
+        session.user.id = token.id as string;
+      }
+      return session;
+    },
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
       const isOnDashboard = nextUrl.pathname.startsWith('/dashboard');

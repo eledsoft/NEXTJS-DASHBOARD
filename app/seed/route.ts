@@ -1,9 +1,8 @@
 import bcrypt from 'bcrypt';
-import postgres from 'postgres';
-import { invoices, customers, revenue, users } from '../lib/placeholder-data';
+import { sql } from '@/app/lib/db';
+import { invoices, customers, revenue, users, relatives } from '../lib/placeholder-data';
 
-console.log('Seeding database...' + process);
-const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
+console.log('Seeding database...');
 
 async function seedUsers(sqlClient: any) {
   await sqlClient`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
@@ -102,6 +101,40 @@ async function seedRevenue(sqlClient: any) {
   return insertedRevenue;
 }
 
+async function seedRelatives(sqlClient: any) {
+  await sqlClient`
+    CREATE TABLE IF NOT EXISTS relatives (
+      id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+      name VARCHAR(255) NOT NULL,
+      lastname VARCHAR(255) NOT NULL,
+      age INTEGER NOT NULL,
+      relationship VARCHAR(100) NOT NULL,
+      related_to UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      created_at TIMESTAMP DEFAULT NOW()
+    );
+  `;
+
+  const insertedRelatives = await Promise.all(
+    relatives.map(async (relative) => {
+      return sqlClient`
+        INSERT INTO relatives (id, name, lastname, age, relationship, related_to)
+        VALUES (
+          ${relative.id}, 
+          ${relative.name}, 
+          ${relative.lastname}, 
+          ${relative.age}, 
+          ${relative.relationship}, 
+          ${relative.related_to}
+        )
+        ON CONFLICT (id) DO NOTHING;
+      `;
+    }),
+  );
+
+  return insertedRelatives;
+}
+
+
 export async function GET() {
   try {
     await sql.begin(async (trx) => {
@@ -109,6 +142,7 @@ export async function GET() {
       // await seedCustomers(trx);
       // await seedInvoices(trx);
       // await seedRevenue(trx);
+      await seedRelatives(trx);
     });
 
     return Response.json({ message: 'Database seeded successfully' });

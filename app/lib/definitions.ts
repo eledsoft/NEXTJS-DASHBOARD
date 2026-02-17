@@ -31,6 +31,16 @@ export type Revenue = {
   revenue: number;
 };
 
+export type Relative = {
+  id: string; // UUID 
+  name: string;
+  lastname: string;
+  age: number;
+  relationship: string;
+  related_to: string; // UUID
+  created_at?: Date;
+};
+
 export type LatestInvoice = {
   id: string;
   name: string;
