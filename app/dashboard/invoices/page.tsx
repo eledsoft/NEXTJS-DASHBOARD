@@ -1,20 +1,18 @@
-
 import Pagination from '@/app/ui/invoices/pagination';
 import Search from '@/app/ui/search';
 import Table from '@/app/ui/invoices/table';
 import { CreateInvoice } from '@/app/ui/invoices/buttons';
-import { lusitana } from '@/app/ui/fonts';
 import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
 import { Suspense } from 'react';
 import { fetchInvoicesPages } from '@/app/lib/data';
 import { getRelatives } from '@/app/dal/relatives';
 import { Metadata } from 'next';
 import RelativesBadge from '@/app/ui/relativies/RelativesBadge';
- 
+
 export const metadata: Metadata = {
   title: 'Invoices',
 };
- 
+
 export default async function Page(props: {
   searchParams?: Promise<{
     query?: string;
@@ -30,26 +28,26 @@ export default async function Page(props: {
   ]);
 
   return (
-    <div className="w-full">
-      <div className="flex w-full items-center justify-between">
-        <h1 className={`${lusitana.className} text-2xl`}>Invoices</h1>
+    <div style={{ width: '100%' }}>
+      <div style={{ display: 'flex', width: '100%', alignItems: 'center', justifyContent: 'space-between' }}>
+        <h1 style={{ fontFamily: 'var(--font-lusitana), serif', fontSize: '1.5rem' }}>Invoices</h1>
       </div>
       {/* SERVER: dato letto via getRelatives() con "use cache" */}
-      <div className="mt-2 rounded-md bg-blue-50 p-3 text-sm text-blue-700">
-        (Server) Hai <span className="font-bold">{relatives.length}</span> parenti registrati
+      <div style={{ marginTop: 8, borderRadius: 6, backgroundColor: '#eff6ff', padding: 12, fontSize: '0.875rem', color: '#1d4ed8' }}>
+        (Server) Hai <span style={{ fontWeight: 'bold' }}>{relatives.length}</span> parenti registrati
       </div>
-      {/* CLIENT: dato letto via useRelatives() dal Context — zero fetch, interattivo */}
-      <div className="mt-2">
+      {/* CLIENT: dato letto via useRelatives() dal Context */}
+      <div style={{ marginTop: 8 }}>
         <RelativesBadge />
       </div>
-      <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
+      <div style={{ marginTop: 16, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8 }}>
         <Search placeholder="Search invoices..." />
         <CreateInvoice />
       </div>
-       <Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}>
+      <Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}>
         <Table query={query} currentPage={currentPage} />
       </Suspense>
-      <div className="mt-5 flex w-full justify-center">
+      <div style={{ marginTop: 20, display: 'flex', width: '100%', justifyContent: 'center' }}>
         <Pagination totalPages={totalPages} />
       </div>
     </div>

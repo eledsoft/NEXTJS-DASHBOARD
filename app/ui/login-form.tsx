@@ -1,15 +1,17 @@
 'use client';
 
-import { lusitana } from '@/app/ui/fonts';
-import {
-  AtSymbolIcon,
-  KeyIcon,
-  ExclamationCircleIcon,
-} from '@heroicons/react/24/outline';
-import { ArrowRightIcon } from '@heroicons/react/20/solid';
-import { Button } from './button';
+import TextField from '@mui/material/TextField';
+import InputAdornment from '@mui/material/InputAdornment';
+import MuiButton from '@mui/material/Button';
+import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import AlternateEmail from '@mui/icons-material/AlternateEmail';
+import VpnKey from '@mui/icons-material/VpnKey';
+import ArrowForward from '@mui/icons-material/ArrowForward';
+import ErrorOutline from '@mui/icons-material/ErrorOutline';
 import { useActionState } from 'react';
-import { authenticate } from '@/app/lib/actionsMui'; 
+import { authenticate } from '@/app/lib/actionsMui';
 import { useSearchParams } from 'next/navigation';
 
 export default function LoginForm() {
@@ -21,69 +23,85 @@ export default function LoginForm() {
   );
 
   return (
-    <form action={formAction} className="space-y-3">
-      <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
-        <h1 className={`${lusitana.className} mb-3 text-2xl`}>
+    <Box component="form" action={formAction} sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
+      <Paper elevation={0} sx={{ flex: 1, bgcolor: 'grey.50', px: 3, pb: 2, pt: 4, borderRadius: 2 }}>
+        <Typography
+          variant="h5"
+          sx={{ mb: 1.5, fontFamily: 'var(--font-lusitana), serif' }}
+        >
           Please log in to continue.
-        </h1>
-        <div className="w-full">
-          <div>
-            <label
-              className="mb-3 mt-5 block text-xs font-medium text-gray-900"
-              htmlFor="email"
-            >
-              Email
-            </label>
-            <div className="relative">
-              <input
-                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
-                id="email"
-                type="email"
-                name="email"
-                placeholder="Enter your email address"
-                required
-              />
-              <AtSymbolIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
-            </div>
-          </div>
-          <div className="mt-4">
-            <label
-              className="mb-3 mt-5 block text-xs font-medium text-gray-900"
-              htmlFor="password"
-            >
-              Password
-            </label>
-            <div className="relative">
-              <input
-                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
-                id="password"
-                type="password"
-                name="password"
-                placeholder="Enter password"
-                required
-                minLength={6}
-              />
-              <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
-            </div>
-          </div>
-        </div>
+        </Typography>
+        <Box sx={{ width: '100%' }}>
+          <TextField
+            id="email"
+            type="email"
+            name="email"
+            label="Email"
+            placeholder="Enter your email address"
+            required
+            fullWidth
+            size="small"
+            slotProps={{
+              input: {
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <AlternateEmail sx={{ fontSize: 18, color: 'grey.500' }} />
+                  </InputAdornment>
+                ),
+              },
+            }}
+            sx={{ mb: 2, mt: 2.5 }}
+          />
+          <TextField
+            id="password"
+            type="password"
+            name="password"
+            label="Password"
+            placeholder="Enter password"
+            required
+            fullWidth
+            size="small"
+            slotProps={{
+              input: {
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <VpnKey sx={{ fontSize: 18, color: 'grey.500' }} />
+                  </InputAdornment>
+                ),
+              },
+              htmlInput: {
+                minLength: 6,
+              },
+            }}
+            sx={{ mb: 2 }}
+          />
+        </Box>
         <input type="hidden" name="redirectTo" value={callbackUrl} />
-        <Button className="mt-4 w-full" aria-disabled={isPending}>
-          Log in <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
-        </Button>
-        <div
-          className="flex h-8 items-end space-x-1"
+        <MuiButton
+          type="submit"
+          variant="contained"
+          fullWidth
+          disabled={isPending}
+          endIcon={<ArrowForward />}
+          sx={{ mt: 2, textTransform: 'none', height: 40 }}
+        >
+          Log in
+        </MuiButton>
+        <Box
+          sx={{ display: 'flex', height: 32, alignItems: 'flex-end', gap: 0.5 }}
           aria-live="polite"
           aria-atomic="true"
         >
           {errorMessage && (
             <>
-              <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
-              <p className="text-sm text-red-500">{errorMessage}</p>
+              <ErrorOutline sx={{ fontSize: 20, color: 'error.main' }} />
+              <Typography variant="body2" color="error">
+                {errorMessage}
+              </Typography>
             </>
           )}
-        </div>
-      </div>
-    </form>
+        </Box>
+      </Paper>
+    </Box>
   );
 }

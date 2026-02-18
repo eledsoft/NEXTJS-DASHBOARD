@@ -14,7 +14,7 @@
 
 import { z } from 'zod';
 import { sql } from '@/app/lib/db';
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 export type State = {
@@ -97,7 +97,8 @@ export async function createInvoice(prevState: State, formData: FormData) {
     }
 
 
-    revalidatePath('/dashboard/invoices'); //Once the database has been updated, the /dashboard/invoices path will be revalidated, and fresh data will be fetched from the server.
+    revalidateTag('invoices', 'max');
+    revalidatePath('/dashboard/invoices');
     redirect('/dashboard/invoices');
     // Test it out:
     // console.log(rawFormData);
@@ -141,6 +142,7 @@ export async function updateInvoice(  id: string, prevState: State, formData: Fo
         }
     }
 
+    revalidateTag('invoices', 'max');
     revalidatePath('/dashboard/invoices');
     redirect('/dashboard/invoices');
 }
@@ -149,5 +151,6 @@ export async function deleteInvoice(id: string) {
     throw new Error('Failed to Delete Invoice');
 
     await sql`DELETE FROM invoices WHERE id = ${id}`;
+    revalidateTag('invoices', 'max');
     revalidatePath('/dashboard/invoices');
 }

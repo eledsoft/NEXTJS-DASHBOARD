@@ -1,56 +1,98 @@
+'use client';
+
 import AcmeLogo from '@/app/ui/acme-logo';
-import { ArrowRightIcon } from '@heroicons/react/24/outline';
+import ArrowForward from '@mui/icons-material/ArrowForward';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import MuiButton from '@mui/material/Button';
+import Paper from '@mui/material/Paper';
+import MuiLink from '@mui/material/Link';
 import Link from 'next/link';
-import styles from '@/app/ui/home.module.css';
-import { lusitana } from '@/app/ui/fonts'
 import Image from 'next/image';
 
 export default function Page() {
   return (
-    <main className="flex min-h-screen flex-col p-6">
-      <div className="flex h-20 shrink-0 items-end rounded-lg bg-blue-500 p-4 md:h-52">
+    <Box component="main" sx={{ display: 'flex', minHeight: '100vh', flexDirection: 'column', p: 3 }}>
+      <Box sx={{ display: 'flex', height: { xs: 80, md: 208 }, flexShrink: 0, alignItems: 'flex-end', borderRadius: 2, bgcolor: 'primary.main', p: 2 }}>
         <AcmeLogo />
-      </div>
-      <div className="mt-4 flex grow flex-col gap-4 md:flex-row">
-        <div className="flex flex-col justify-center gap-6 rounded-lg bg-gray-50 px-6 py-10 md:w-2/5 md:px-20">
-          <p className={`text-xl text-gray-800 md:text-3xl md:leading-normal ${lusitana.className} antialiased`}>
-
-            {/* <div
-              className="relative w-0 h-0 border-l-[15px] border-r-[15px] border-b-[26px] border-l-transparent border-r-transparent border-b-black"
-            /> */}
-            <div className={styles.shape} />
-            <strong>Welcome to Acme.</strong> This is the example for the{' '}
-            <a href="https://nextjs.org/learn/" className="text-blue-500">
-              Next.js Learn Course e
-            </a>
-            , brought to you by Vercel.
-          </p>
-
-          <Link
-            href="/login"
-            className="flex items-center gap-5 self-start rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-400 md:text-base"
+      </Box>
+      <Box sx={{ mt: 2, display: 'flex', flexGrow: 1, flexDirection: { xs: 'column', md: 'row' }, gap: 2 }}>
+        <Paper
+          elevation={0}
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            gap: 3,
+            borderRadius: 2,
+            bgcolor: 'grey.50',
+            px: { xs: 3, md: 10 },
+            py: 5,
+            width: { md: '40%' },
+          }}
+        >
+          <Typography
+            sx={{
+              fontFamily: 'var(--font-lusitana), serif',
+              fontSize: { xs: '1.25rem', md: '1.875rem' },
+              lineHeight: { md: 1.5 },
+              color: 'grey.800',
+            }}
           >
-            <span>Log in</span> <ArrowRightIcon className="w-5 md:w-6" />
-          </Link>
-        </div>
-        <div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
-          {/* Add Hero Images Here */}
-          <Image
-            src="/hero-desktop.png"
-            width={1000}
-            height={760}
-            className="hidden md:block"
-            alt="Screenshots of the dashboard project showing desktop version"
-          />
-          <Image
-            src="/hero-mobile.png"
-            width={1000}
-            height={760}
-            className="block md:hidden"
-            alt="Mobile Screenshots of the dashboard project showing mobile version"
-          />
-        </div>
-      </div>
-    </main>
+            <Box
+              component="span"
+              sx={{
+                display: 'inline-block',
+                width: 0,
+                height: 0,
+                borderBottom: '30px solid black',
+                borderLeft: '20px solid transparent',
+                borderRight: '20px solid transparent',
+              }}
+            />
+            <strong>Welcome to Acme.</strong> This is the example for the{' '}
+            <MuiLink href="https://nextjs.org/learn/" sx={{ color: 'primary.main' }}>
+              Next.js Learn Course e
+            </MuiLink>
+            , brought to you by Vercel.
+          </Typography>
+
+          <MuiButton
+            component={Link}
+            href="/login"
+            variant="contained"
+            endIcon={<ArrowForward />}
+            sx={{
+              alignSelf: 'flex-start',
+              textTransform: 'none',
+              fontSize: { xs: '0.875rem', md: '1rem' },
+              px: 3,
+              py: 1.5,
+              gap: 2.5,
+            }}
+          >
+            Log in
+          </MuiButton>
+        </Paper>
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', p: 3, width: { md: '60%' }, px: { md: 14 }, py: { md: 6 } }}>
+          <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+            <Image
+              src="/hero-desktop.png"
+              width={1000}
+              height={760}
+              alt="Screenshots of the dashboard project showing desktop version"
+            />
+          </Box>
+          <Box sx={{ display: { xs: 'block', md: 'none' } }}>
+            <Image
+              src="/hero-mobile.png"
+              width={1000}
+              height={760}
+              alt="Mobile Screenshots of the dashboard project showing mobile version"
+            />
+          </Box>
+        </Box>
+      </Box>
+    </Box>
   );
 }

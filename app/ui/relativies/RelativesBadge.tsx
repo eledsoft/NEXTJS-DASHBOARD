@@ -2,54 +2,81 @@
 
 import { useState } from 'react';
 import { useRelatives } from '@/app/ui/providers/RelativesProvider';
+import Button from '@mui/material/Button';
+import Popover from '@mui/material/Popover';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Chip from '@mui/material/Chip';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
 
 export default function RelativesBadge() {
     const { relatives } = useRelatives();
-    const [open, setOpen] = useState(false);
+    const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
-    // Raggruppa per tipo di relazione
     const byRelationship = relatives.reduce<Record<string, number>>((acc, r) => {
         acc[r.relationship] = (acc[r.relationship] || 0) + 1;
         return acc;
     }, {});
 
+    const open = Boolean(anchorEl);
+
     return (
-        <div className="relative">
-            <button
-                onClick={() => setOpen(!open)}
-                className="flex items-center gap-2 rounded-md bg-indigo-100 px-3 py-2 text-sm font-medium text-indigo-700 hover:bg-indigo-200 transition-colors"
+        <>
+            <Button
+                onClick={(e) => setAnchorEl(anchorEl ? null : e.currentTarget)}
+                size="small"
+                sx={{
+                    bgcolor: '#e0e7ff',
+                    color: '#4338ca',
+                    textTransform: 'none',
+                    fontWeight: 500,
+                    fontSize: '0.875rem',
+                    '&:hover': { bgcolor: '#c7d2fe' },
+                }}
             >
-                👨‍👩‍👧‍👦 {relatives.length} parenti
-                <span className="text-xs">{open ? '▲' : '▼'}</span>
-            </button>
+                {relatives.length} parenti {open ? '▲' : '▼'}
+            </Button>
 
-            {open && (
-                <div className="absolute top-full left-0 z-10 mt-1 w-64 rounded-md border bg-white p-3 shadow-lg">
-                    <h4 className="mb-2 text-sm font-semibold text-gray-700">I tuoi parenti</h4>
+            <Popover
+                open={open}
+                anchorEl={anchorEl}
+                onClose={() => setAnchorEl(null)}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+                transformOrigin={{ vertical: 'top', horizontal: 'left' }}
+                slotProps={{ paper: { sx: { width: 256, p: 1.5, mt: 0.5 } } }}
+            >
+                <Typography variant="subtitle2" sx={{ mb: 1, color: 'grey.700' }}>
+                    I tuoi parenti
+                </Typography>
 
-                    {/* Riepilogo per relazione */}
-                    <div className="mb-3 flex flex-wrap gap-1">
-                        {Object.entries(byRelationship).map(([rel, count]) => (
-                            <span
-                                key={rel}
-                                className="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-600"
-                            >
-                                {rel}: {count}
-                            </span>
-                        ))}
-                    </div>
+                <Box sx={{ mb: 1.5, display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                    {Object.entries(byRelationship).map(([rel, count]) => (
+                        <Chip
+                            key={rel}
+                            label={`${rel}: ${count}`}
+                            size="small"
+                            sx={{ bgcolor: 'grey.100', color: 'grey.600', fontSize: '0.75rem' }}
+                        />
+                    ))}
+                </Box>
 
-                    {/* Lista nomi */}
-                    <ul className="max-h-40 overflow-y-auto space-y-1">
-                        {relatives.map((r) => (
-                            <li key={r.id} className="flex items-center justify-between text-sm">
-                                <span>{r.name} {r.lastname}</span>
-                                <span className="text-xs text-gray-400">{r.relationship}</span>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            )}
-        </div>
+                <List dense sx={{ maxHeight: 160, overflowY: 'auto' }}>
+                    {relatives.map((r) => (
+                        <ListItem key={r.id} disablePadding sx={{ py: 0.25 }}>
+                            <ListItemText
+                                primary={`${r.name} ${r.lastname}`}
+                                secondary={r.relationship}
+                                slotProps={{
+                                    primary: { sx: { fontSize: '0.875rem' } },
+                                    secondary: { sx: { fontSize: '0.75rem', color: 'grey.400' } },
+                                }}
+                            />
+                        </ListItem>
+                    ))}
+                </List>
+            </Popover>
+        </>
     );
 }

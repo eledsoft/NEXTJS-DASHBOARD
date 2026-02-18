@@ -9,7 +9,7 @@ import { grey } from '@mui/material/colors';
 import { Avatar } from '@mui/material';
   import { auth } from '@/auth';
 import { getRelatives, verifySession } from '@/app/dal/relatives';
-import Loading from '@/app/dashboard/(overview)/loading';
+// import Loading from '@/app/dashboard/(overview)/loading';
 
 export default async function SideNav() {
   //add route protection to this component, so

@@ -1,7 +1,7 @@
 'use server';
 
 import { sql } from '@/app/lib/db';
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { invoiceFormSchema } from '@/app/lib/validations';
 import { signIn } from '@/auth';
@@ -74,6 +74,7 @@ export async function createInvoice(prevState: State, formData: FormData) {
     };
   }
 
+  revalidateTag('invoices', 'max');
   revalidatePath('/dashboard/invoices');
   redirect('/dashboard/invoices');
 }
@@ -125,6 +126,7 @@ export async function updateInvoice(id: string, prevState: State, formData: Form
     };
   }
 
+  revalidateTag('invoices', 'max');
   revalidatePath('/dashboard/invoices');
   redirect('/dashboard/invoices');
 }
@@ -149,6 +151,7 @@ export async function deleteInvoice(id: string) {
       customerId: invoice[0].customer_id,
     });
 
+    revalidateTag('invoices', 'max');
     revalidatePath('/dashboard/invoices');
   } catch (error) {
     console.error('Failed to delete invoice:', error);

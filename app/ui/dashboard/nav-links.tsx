@@ -1,26 +1,20 @@
 'use client';
 
-import {
-  UserGroupIcon,
-  HomeIcon,
-  DocumentDuplicateIcon,
-} from '@heroicons/react/24/outline';
-import Link from 'next/dist/client/link';
+import Home from '@mui/icons-material/Home';
+import Description from '@mui/icons-material/Description';
+import Group from '@mui/icons-material/Group';
+import People from '@mui/icons-material/People';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import clsx from 'clsx';
-import { UsersIcon } from '@heroicons/react/20/solid';
 
-// Map of links to display in the side navigation.
-// Depending on the size of the application, this would be stored in a database.
 const links = [
-  { name: 'Home', href: '/dashboard', icon: HomeIcon },
-  {
-    name: 'Invoices',
-    href: '/dashboard/invoices',
-    icon: DocumentDuplicateIcon,
-  },
-  { name: 'Customers', href: '/dashboard/customers', icon: UserGroupIcon },
-   { name: 'Relatives', href: '/dashboard/relatives', icon: UsersIcon },
+  { name: 'Home', href: '/dashboard', icon: Home },
+  { name: 'Invoices', href: '/dashboard/invoices', icon: Description },
+  { name: 'Customers', href: '/dashboard/customers', icon: Group },
+  { name: 'Relatives', href: '/dashboard/relatives', icon: People },
 ];
 
 export default function NavLinks() {
@@ -30,20 +24,44 @@ export default function NavLinks() {
     <>
       {links.map((link) => {
         const LinkIcon = link.icon;
+        const isActive = pathname === link.href;
         return (
-          <Link
+          <ListItemButton
             key={link.name}
+            component={Link}
             href={link.href}
-             className={clsx(
-              'flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3',
-              {
-                'bg-sky-100 text-blue-600': pathname === link.href,
+            selected={isActive}
+            sx={{
+              height: 48,
+              gap: 1,
+              borderRadius: 1,
+              bgcolor: isActive ? '#e0f2fe' : 'grey.50',
+              color: isActive ? 'primary.dark' : 'text.primary',
+              fontSize: '0.875rem',
+              fontWeight: 500,
+              justifyContent: { xs: 'center', md: 'flex-start' },
+              px: { xs: 1.5, md: 1.5 },
+              py: { xs: 1.5, md: 1 },
+              flexGrow: { xs: 1, md: 0 },
+              '&:hover': {
+                bgcolor: '#e0f2fe',
+                color: 'primary.dark',
               },
-            )}
+              '&.Mui-selected': {
+                bgcolor: '#e0f2fe',
+                color: 'primary.dark',
+              },
+            }}
           >
-            <LinkIcon className="w-6" />
-            <p className="hidden md:block">{link.name}</p>
-          </Link>
+            <ListItemIcon sx={{ minWidth: 'auto', color: 'inherit' }}>
+              <LinkIcon sx={{ width: 24 }} />
+            </ListItemIcon>
+            <ListItemText
+              primary={link.name}
+              sx={{ display: { xs: 'none', md: 'block' } }}
+              slotProps={{ primary: { sx: { fontSize: 'inherit', fontWeight: 'inherit' } } }}
+            />
+          </ListItemButton>
         );
       })}
     </>

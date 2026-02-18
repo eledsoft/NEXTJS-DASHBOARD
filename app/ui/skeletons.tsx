@@ -1,20 +1,25 @@
-// Loading animation
-const shimmer =
-  'before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_2s_infinite] before:bg-gradient-to-r before:from-transparent before:via-white/60 before:to-transparent';
+'use client';
+
+import Skeleton from '@mui/material/Skeleton';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
 
 export function CardSkeleton() {
   return (
-    <div
-      className={`${shimmer} relative overflow-hidden rounded-xl bg-gray-100 p-2 shadow-sm`}
-    >
-      <div className="flex p-4">
-        <div className="h-5 w-5 rounded-md bg-gray-200" />
-        <div className="ml-2 h-6 w-16 rounded-md bg-gray-200 text-sm font-medium" />
-      </div>
-      <div className="flex items-center justify-center truncate rounded-xl bg-white px-4 py-8">
-        <div className="h-7 w-20 rounded-md bg-gray-200" />
-      </div>
-    </div>
+    <Paper elevation={0} sx={{ borderRadius: 3, bgcolor: 'grey.100', p: 1, boxShadow: '0 1px 2px rgba(0,0,0,0.05)' }}>
+      <Box sx={{ display: 'flex', p: 2 }}>
+        <Skeleton variant="rounded" width={20} height={20} />
+        <Skeleton variant="rounded" width={64} height={24} sx={{ ml: 1 }} />
+      </Box>
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 3, bgcolor: 'white', px: 2, py: 4 }}>
+        <Skeleton variant="rounded" width={80} height={28} />
+      </Box>
+    </Paper>
   );
 }
 
@@ -31,188 +36,153 @@ export function CardsSkeleton() {
 
 export function RevenueChartSkeleton() {
   return (
-    <div className={`${shimmer} relative w-full overflow-hidden md:col-span-4`}>
-      <div className="mb-4 h-8 w-36 rounded-md bg-gray-100" />
-      <div className="rounded-xl bg-gray-100 p-4">
-        <div className="sm:grid-cols-13 mt-0 grid h-[410px] grid-cols-12 items-end gap-2 rounded-md bg-white p-4 md:gap-4" />
-        <div className="flex items-center pb-2 pt-6">
-          <div className="h-5 w-5 rounded-full bg-gray-200" />
-          <div className="ml-2 h-4 w-20 rounded-md bg-gray-200" />
-        </div>
-      </div>
-    </div>
+    <Box sx={{ width: '100%', overflow: 'hidden', gridColumn: { md: 'span 4' } }}>
+      <Skeleton variant="rounded" width={144} height={32} sx={{ mb: 2 }} />
+      <Paper elevation={0} sx={{ borderRadius: 3, bgcolor: 'grey.100', p: 2 }}>
+        <Skeleton variant="rounded" height={410} sx={{ borderRadius: 2 }} />
+        <Box sx={{ display: 'flex', alignItems: 'center', pb: 1, pt: 3 }}>
+          <Skeleton variant="circular" width={20} height={20} />
+          <Skeleton variant="rounded" width={80} height={16} sx={{ ml: 1 }} />
+        </Box>
+      </Paper>
+    </Box>
   );
 }
 
 export function InvoiceSkeleton() {
   return (
-    <div className="flex flex-row items-center justify-between border-b border-gray-100 py-4">
-      <div className="flex items-center">
-        <div className="mr-2 h-8 w-8 rounded-full bg-gray-200" />
-        <div className="min-w-0">
-          <div className="h-5 w-40 rounded-md bg-gray-200" />
-          <div className="mt-2 h-4 w-12 rounded-md bg-gray-200" />
-        </div>
-      </div>
-      <div className="mt-2 h-4 w-12 rounded-md bg-gray-200" />
-    </div>
+    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid', borderColor: 'grey.100', py: 2 }}>
+      <Box sx={{ display: 'flex', alignItems: 'center' }}>
+        <Skeleton variant="circular" width={32} height={32} sx={{ mr: 1 }} />
+        <Box>
+          <Skeleton variant="rounded" width={160} height={20} />
+          <Skeleton variant="rounded" width={48} height={16} sx={{ mt: 1 }} />
+        </Box>
+      </Box>
+      <Skeleton variant="rounded" width={48} height={16} />
+    </Box>
   );
 }
 
 export function LatestInvoicesSkeleton() {
   return (
-    <div
-      className={`${shimmer} relative flex w-full flex-col overflow-hidden md:col-span-4`}
-    >
-      <div className="mb-4 h-8 w-36 rounded-md bg-gray-100" />
-      <div className="flex grow flex-col justify-between rounded-xl bg-gray-100 p-4">
-        <div className="bg-white px-6">
+    <Box sx={{ display: 'flex', width: '100%', flexDirection: 'column', overflow: 'hidden', gridColumn: { md: 'span 4' } }}>
+      <Skeleton variant="rounded" width={144} height={32} sx={{ mb: 2 }} />
+      <Paper elevation={0} sx={{ display: 'flex', flexGrow: 1, flexDirection: 'column', justifyContent: 'space-between', borderRadius: 3, bgcolor: 'grey.100', p: 2 }}>
+        <Box sx={{ bgcolor: 'white', px: 3 }}>
           <InvoiceSkeleton />
           <InvoiceSkeleton />
           <InvoiceSkeleton />
           <InvoiceSkeleton />
           <InvoiceSkeleton />
-        </div>
-        <div className="flex items-center pb-2 pt-6">
-          <div className="h-5 w-5 rounded-full bg-gray-200" />
-          <div className="ml-2 h-4 w-20 rounded-md bg-gray-200" />
-        </div>
-      </div>
-    </div>
+        </Box>
+        <Box sx={{ display: 'flex', alignItems: 'center', pb: 1, pt: 3 }}>
+          <Skeleton variant="circular" width={20} height={20} />
+          <Skeleton variant="rounded" width={80} height={16} sx={{ ml: 1 }} />
+        </Box>
+      </Paper>
+    </Box>
   );
 }
 
 export default function DashboardSkeleton() {
   return (
     <>
-      <div
-        className={`${shimmer} relative mb-4 h-8 w-36 overflow-hidden rounded-md bg-gray-100`}
-      />
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <Skeleton variant="rounded" width={144} height={32} sx={{ mb: 2, borderRadius: 2 }} />
+      <Box sx={{ display: 'grid', gap: 3, gridTemplateColumns: { sm: 'repeat(2, 1fr)', lg: 'repeat(4, 1fr)' } }}>
         <CardSkeleton />
         <CardSkeleton />
         <CardSkeleton />
         <CardSkeleton />
-      </div>
-      <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
+      </Box>
+      <Box sx={{ mt: 3, display: 'grid', gridTemplateColumns: { xs: '1fr', md: 'repeat(4, 1fr)', lg: 'repeat(8, 1fr)' }, gap: 3 }}>
         <RevenueChartSkeleton />
         <LatestInvoicesSkeleton />
-      </div>
+      </Box>
     </>
   );
 }
 
 export function TableRowSkeleton() {
   return (
-    <tr className="w-full border-b border-gray-100 last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg">
-      {/* Customer Name and Image */}
-      <td className="relative overflow-hidden whitespace-nowrap py-3 pl-6 pr-3">
-        <div className="flex items-center gap-3">
-          <div className="h-8 w-8 rounded-full bg-gray-100"></div>
-          <div className="h-6 w-24 rounded bg-gray-100"></div>
-        </div>
-      </td>
-      {/* Email */}
-      <td className="whitespace-nowrap px-3 py-3">
-        <div className="h-6 w-32 rounded bg-gray-100"></div>
-      </td>
-      {/* Amount */}
-      <td className="whitespace-nowrap px-3 py-3">
-        <div className="h-6 w-16 rounded bg-gray-100"></div>
-      </td>
-      {/* Date */}
-      <td className="whitespace-nowrap px-3 py-3">
-        <div className="h-6 w-16 rounded bg-gray-100"></div>
-      </td>
-      {/* Status */}
-      <td className="whitespace-nowrap px-3 py-3">
-        <div className="h-6 w-16 rounded bg-gray-100"></div>
-      </td>
-      {/* Actions */}
-      <td className="whitespace-nowrap py-3 pl-6 pr-3">
-        <div className="flex justify-end gap-3">
-          <div className="h-[38px] w-[38px] rounded bg-gray-100"></div>
-          <div className="h-[38px] w-[38px] rounded bg-gray-100"></div>
-        </div>
-      </td>
-    </tr>
+    <TableRow>
+      <TableCell sx={{ py: 1.5, pl: 3, pr: 1.5 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+          <Skeleton variant="circular" width={32} height={32} />
+          <Skeleton variant="rounded" width={96} height={24} />
+        </Box>
+      </TableCell>
+      <TableCell sx={{ px: 1.5, py: 1.5 }}><Skeleton variant="rounded" width={128} height={24} /></TableCell>
+      <TableCell sx={{ px: 1.5, py: 1.5 }}><Skeleton variant="rounded" width={64} height={24} /></TableCell>
+      <TableCell sx={{ px: 1.5, py: 1.5 }}><Skeleton variant="rounded" width={64} height={24} /></TableCell>
+      <TableCell sx={{ px: 1.5, py: 1.5 }}><Skeleton variant="rounded" width={64} height={24} /></TableCell>
+      <TableCell sx={{ py: 1.5, pl: 3, pr: 1.5 }}>
+        <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 1.5 }}>
+          <Skeleton variant="rounded" width={38} height={38} />
+          <Skeleton variant="rounded" width={38} height={38} />
+        </Box>
+      </TableCell>
+    </TableRow>
   );
 }
 
 export function InvoicesMobileSkeleton() {
   return (
-    <div className="mb-2 w-full rounded-md bg-white p-4">
-      <div className="flex items-center justify-between border-b border-gray-100 pb-8">
-        <div className="flex items-center">
-          <div className="mr-2 h-8 w-8 rounded-full bg-gray-100"></div>
-          <div className="h-6 w-16 rounded bg-gray-100"></div>
-        </div>
-        <div className="h-6 w-16 rounded bg-gray-100"></div>
-      </div>
-      <div className="flex w-full items-center justify-between pt-4">
-        <div>
-          <div className="h-6 w-16 rounded bg-gray-100"></div>
-          <div className="mt-2 h-6 w-24 rounded bg-gray-100"></div>
-        </div>
-        <div className="flex justify-end gap-2">
-          <div className="h-10 w-10 rounded bg-gray-100"></div>
-          <div className="h-10 w-10 rounded bg-gray-100"></div>
-        </div>
-      </div>
-    </div>
+    <Paper elevation={0} sx={{ mb: 1, width: '100%', p: 2, borderRadius: 2 }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid', borderColor: 'grey.100', pb: 4 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Skeleton variant="circular" width={32} height={32} sx={{ mr: 1 }} />
+          <Skeleton variant="rounded" width={64} height={24} />
+        </Box>
+        <Skeleton variant="rounded" width={64} height={24} />
+      </Box>
+      <Box sx={{ display: 'flex', width: '100%', alignItems: 'center', justifyContent: 'space-between', pt: 2 }}>
+        <Box>
+          <Skeleton variant="rounded" width={64} height={24} />
+          <Skeleton variant="rounded" width={96} height={24} sx={{ mt: 1 }} />
+        </Box>
+        <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 1 }}>
+          <Skeleton variant="rounded" width={40} height={40} />
+          <Skeleton variant="rounded" width={40} height={40} />
+        </Box>
+      </Box>
+    </Paper>
   );
 }
 
 export function InvoicesTableSkeleton() {
   return (
-    <div className="mt-6 flow-root">
-      <div className="inline-block min-w-full align-middle">
-        <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
-          <div className="md:hidden">
-            <InvoicesMobileSkeleton />
-            <InvoicesMobileSkeleton />
-            <InvoicesMobileSkeleton />
-            <InvoicesMobileSkeleton />
-            <InvoicesMobileSkeleton />
-            <InvoicesMobileSkeleton />
-          </div>
-          <table className="hidden min-w-full text-gray-900 md:table">
-            <thead className="rounded-lg text-left text-sm font-normal">
-              <tr>
-                <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
-                  Customer
-                </th>
-                <th scope="col" className="px-3 py-5 font-medium">
-                  Email
-                </th>
-                <th scope="col" className="px-3 py-5 font-medium">
-                  Amount
-                </th>
-                <th scope="col" className="px-3 py-5 font-medium">
-                  Date
-                </th>
-                <th scope="col" className="px-3 py-5 font-medium">
-                  Status
-                </th>
-                <th
-                  scope="col"
-                  className="relative pb-4 pl-3 pr-6 pt-2 sm:pr-6"
-                >
-                  <span className="sr-only">Edit</span>
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-white">
-              <TableRowSkeleton />
-              <TableRowSkeleton />
-              <TableRowSkeleton />
-              <TableRowSkeleton />
-              <TableRowSkeleton />
-              <TableRowSkeleton />
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
+    <Box sx={{ mt: 3 }}>
+      <Paper elevation={0} sx={{ borderRadius: 2, bgcolor: 'grey.50', p: 1, pt: { md: 0 } }}>
+        <Box sx={{ display: { xs: 'block', md: 'none' } }}>
+          <InvoicesMobileSkeleton />
+          <InvoicesMobileSkeleton />
+          <InvoicesMobileSkeleton />
+          <InvoicesMobileSkeleton />
+          <InvoicesMobileSkeleton />
+          <InvoicesMobileSkeleton />
+        </Box>
+        <Table sx={{ display: { xs: 'none', md: 'table' }, minWidth: '100%', color: 'grey.900' }}>
+          <TableHead>
+            <TableRow>
+              <TableCell sx={{ fontWeight: 500 }}>Customer</TableCell>
+              <TableCell sx={{ fontWeight: 500 }}>Email</TableCell>
+              <TableCell sx={{ fontWeight: 500 }}>Amount</TableCell>
+              <TableCell sx={{ fontWeight: 500 }}>Date</TableCell>
+              <TableCell sx={{ fontWeight: 500 }}>Status</TableCell>
+              <TableCell sx={{ fontWeight: 500 }} align="right">Edit</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody sx={{ bgcolor: 'white' }}>
+            <TableRowSkeleton />
+            <TableRowSkeleton />
+            <TableRowSkeleton />
+            <TableRowSkeleton />
+            <TableRowSkeleton />
+            <TableRowSkeleton />
+          </TableBody>
+        </Table>
+      </Paper>
+    </Box>
   );
 }

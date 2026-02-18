@@ -2,7 +2,7 @@
 
 import { sql } from '@/app/lib/db';
 import { z } from 'zod';
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { auth } from '@/auth';
 import { Relative } from '@/app/lib/definitions';
@@ -61,6 +61,7 @@ export async function addRelative(prevState: RelativeState, formData: FormData) 
     };
   }
 
+  revalidateTag(`relatives-${session.user.id}`, 'max');
   revalidatePath('/dashboard');
   revalidatePath('/family');
   redirect('/family');
@@ -83,6 +84,8 @@ export async function deleteRelative(relativeId: string) {
     throw new Error('Failed to Delete Relative.');
   }
 
+  revalidateTag(`relatives-${session.user.id}`, 'max');
+  revalidateTag(`relative-${relativeId}`, 'max');
   revalidatePath('/dashboard');
   revalidatePath('/family');
 }
@@ -127,6 +130,8 @@ export async function updateRelative(relativeId: string, prevState: RelativeStat
     };
   }
 
+  revalidateTag(`relatives-${session.user.id}`, 'max');
+  revalidateTag(`relative-${relativeId}`, 'max');
   revalidatePath('/dashboard');
   revalidatePath('/family');
 }

@@ -6,7 +6,48 @@ import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
 
-const theme = createTheme();
+const theme = createTheme({
+    palette: {
+        primary: {
+            light: '#2589FE',
+            main: '#0070F3',
+            dark: '#2F6FEB',
+        },
+    },
+    breakpoints: {
+        values: {
+            xs: 0,
+            sm: 640,
+            md: 768,
+            lg: 1024,
+            xl: 1280,
+        },
+    },
+    typography: {
+        fontFamily: 'var(--font-inter), sans-serif',
+        h1: { fontFamily: 'var(--font-lusitana), serif' },
+        h2: { fontFamily: 'var(--font-lusitana), serif' },
+        h3: { fontFamily: 'var(--font-lusitana), serif' },
+    },
+    components: {
+        MuiCssBaseline: {
+            styleOverrides: {
+                body: {
+                    WebkitFontSmoothing: 'antialiased',
+                    MozOsxFontSmoothing: 'grayscale',
+                },
+                'input[type="number"]': {
+                    MozAppearance: 'textfield',
+                    appearance: 'textfield',
+                },
+                'input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button': {
+                    WebkitAppearance: 'none',
+                    margin: 0,
+                },
+            },
+        },
+    },
+});
 
 export default function ThemeRegistry({ children }: { children: React.ReactNode }) {
     const [{ cache, flush }] = useState(() => {

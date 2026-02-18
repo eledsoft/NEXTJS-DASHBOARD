@@ -1,6 +1,9 @@
-import { clsx } from 'clsx';
-import Link from 'next/link';
-import { lusitana } from '@/app/ui/fonts';
+'use client';
+
+import MuiBreadcrumbs from '@mui/material/Breadcrumbs';
+import Typography from '@mui/material/Typography';
+import MuiLink from '@mui/material/Link';
+import NextLink from 'next/link';
 
 interface Breadcrumb {
   label: string;
@@ -14,23 +17,45 @@ export default function Breadcrumbs({
   breadcrumbs: Breadcrumb[];
 }) {
   return (
-    <nav aria-label="Breadcrumb" className="mb-6 block">
-      <ol className={clsx(lusitana.className, 'flex text-xl md:text-2xl')}>
-        {breadcrumbs.map((breadcrumb, index) => (
-          <li
+    <MuiBreadcrumbs
+      aria-label="Breadcrumb"
+      separator="/"
+      sx={{
+        mb: 3,
+        '& .MuiBreadcrumbs-ol': {
+          fontFamily: 'var(--font-lusitana), serif',
+          fontSize: { xs: '1.25rem', md: '1.5rem' },
+        },
+      }}
+    >
+      {breadcrumbs.map((breadcrumb) =>
+        breadcrumb.active ? (
+          <Typography
             key={breadcrumb.href}
-            aria-current={breadcrumb.active}
-            className={clsx(
-              breadcrumb.active ? 'text-gray-900' : 'text-gray-500',
-            )}
+            sx={{
+              color: 'grey.900',
+              fontSize: 'inherit',
+              fontFamily: 'inherit',
+            }}
           >
-            <Link href={breadcrumb.href}>{breadcrumb.label}</Link>
-            {index < breadcrumbs.length - 1 ? (
-              <span className="mx-3 inline-block">/</span>
-            ) : null}
-          </li>
-        ))}
-      </ol>
-    </nav>
+            {breadcrumb.label}
+          </Typography>
+        ) : (
+          <MuiLink
+            key={breadcrumb.href}
+            component={NextLink}
+            href={breadcrumb.href}
+            underline="hover"
+            sx={{
+              color: 'grey.500',
+              fontSize: 'inherit',
+              fontFamily: 'inherit',
+            }}
+          >
+            {breadcrumb.label}
+          </MuiLink>
+        ),
+      )}
+    </MuiBreadcrumbs>
   );
 }

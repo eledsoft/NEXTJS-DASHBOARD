@@ -1,18 +1,25 @@
+'use client';
+
 import Link from 'next/link';
-import { FaceFrownIcon } from '@heroicons/react/24/outline';
- 
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import MuiButton from '@mui/material/Button';
+import SentimentDissatisfied from '@mui/icons-material/SentimentDissatisfied';
+
 export default function NotFound() {
   return (
-    <main className="flex h-full flex-col items-center justify-center gap-2">
-      <FaceFrownIcon className="w-10 text-gray-400" />
-      <h2 className="text-xl font-semibold">404 Not Found</h2>
-      <p>Could not find the requested invoice.</p>
-      <Link
+    <Box component="main" sx={{ display: 'flex', height: '100%', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
+      <SentimentDissatisfied sx={{ fontSize: 40, color: 'grey.400' }} />
+      <Typography variant="h6" fontWeight={600}>404 Not Found</Typography>
+      <Typography>Could not find the requested invoice.</Typography>
+      <MuiButton
+        component={Link}
         href="/dashboard/invoices"
-        className="mt-4 rounded-md bg-blue-500 px-4 py-2 text-sm text-white transition-colors hover:bg-blue-400"
+        variant="contained"
+        sx={{ mt: 2, textTransform: 'none' }}
       >
         Go Back
-      </Link>
-    </main>
+      </MuiButton>
+    </Box>
   );
 }

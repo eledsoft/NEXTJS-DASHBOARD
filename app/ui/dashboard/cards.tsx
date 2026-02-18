@@ -1,17 +1,14 @@
-import {
-  BanknotesIcon,
-  ClockIcon,
-  UserGroupIcon,
-  InboxIcon,
-} from '@heroicons/react/24/outline';
-import { lusitana } from '@/app/ui/fonts';
+import AccountBalance from '@mui/icons-material/AccountBalance';
+import Schedule from '@mui/icons-material/Schedule';
+import Inbox from '@mui/icons-material/Inbox';
+import Group from '@mui/icons-material/Group';
 import { fetchCardData } from '@/app/lib/data';
 
 const iconMap = {
-  collected: BanknotesIcon,
-  customers: UserGroupIcon,
-  pending: ClockIcon,
-  invoices: InboxIcon,
+  collected: AccountBalance,
+  customers: Group,
+  pending: Schedule,
+  invoices: Inbox,
 };
 
 export default async function CardWrapper() {
@@ -24,8 +21,6 @@ export default async function CardWrapper() {
 
   return (
     <>
-      {/* NOTE: Uncomment this code in Chapter 9 */}
-
       <Card title="Collected" value={totalPaidInvoices} type="collected" />
       <Card title="Pending" value={totalPendingInvoices} type="pending" />
       <Card title="Total Invoices" value={numberOfInvoices} type="invoices" />
@@ -50,14 +45,23 @@ export function Card({
   const Icon = iconMap[type];
 
   return (
-    <div className="rounded-xl bg-gray-50 p-2 shadow-sm">
-      <div className="flex p-4">
-        {Icon ? <Icon className="h-5 w-5 text-gray-700" /> : null}
-        <h3 className="ml-2 text-sm font-medium">{title}</h3>
+    <div style={{ borderRadius: 12, backgroundColor: '#f9fafb', padding: 8, boxShadow: '0 1px 2px rgba(0,0,0,0.05)' }}>
+      <div style={{ display: 'flex', padding: 16 }}>
+        {Icon ? <Icon style={{ width: 20, height: 20, color: '#374151' }} /> : null}
+        <h3 style={{ marginLeft: 8, fontSize: '0.875rem', fontWeight: 500 }}>{title}</h3>
       </div>
       <p
-        className={`${lusitana.className}
-          truncate rounded-xl bg-white px-4 py-8 text-center text-2xl`}
+        style={{
+          fontFamily: 'var(--font-lusitana), serif',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          whiteSpace: 'nowrap',
+          borderRadius: 12,
+          backgroundColor: 'white',
+          padding: '32px 16px',
+          textAlign: 'center',
+          fontSize: '1.5rem',
+        }}
       >
         {value}
       </p>
