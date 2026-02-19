@@ -5,9 +5,10 @@ import { CreateInvoice } from '@/app/ui/invoices/buttons';
 import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
 import { Suspense } from 'react';
 import { fetchInvoicesPages } from '@/app/lib/data';
-import { getRelatives } from '@/app/dal/relatives';
+import { getRelatives, } from '@/app/dal/relatives';
 import { Metadata } from 'next';
 import RelativesBadge from '@/app/ui/relativies/RelativesBadge';
+import { getRelativesTest } from '@/app/dal/testData';
 
 export const metadata: Metadata = {
   title: 'Invoices',
@@ -27,11 +28,14 @@ export default async function Page(props: {
     getRelatives(),
   ]);
 
+  const relativesTE = getRelativesTest();
+
   return (
     <div style={{ width: '100%' }}>
       <div style={{ display: 'flex', width: '100%', alignItems: 'center', justifyContent: 'space-between' }}>
         <h1 style={{ fontFamily: 'var(--font-lusitana), serif', fontSize: '1.5rem' }}>Invoices</h1>
       </div>
+      <p>{relativesTE}</p>
       {/* SERVER: dato letto via getRelatives() con "use cache" */}
       <div style={{ marginTop: 8, borderRadius: 6, backgroundColor: '#eff6ff', padding: 12, fontSize: '0.875rem', color: '#1d4ed8' }}>
         (Server) Hai <span style={{ fontWeight: 'bold' }}>{relatives.length}</span> parenti registrati

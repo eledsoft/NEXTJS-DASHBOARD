@@ -1,4 +1,11 @@
+import { getRelativesTest } from "@/app/dal/testData";
+
 
 export default function Page() {
-  return <p>Customer Page</p>;
+  const relativesTE = getRelativesTest();
+  return (<>
+    <p>Customer Page</p>
+    <p>{relativesTE} </p>
+  </>
+  )
 }

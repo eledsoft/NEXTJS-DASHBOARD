@@ -1,13 +1,20 @@
 import SideNav from '@/app/ui/dashboard/sidenav';
-import { getRelatives } from '../dal/relatives';
+
+import {  getRelativesTest } from '../dal/testData';
+import {  getRelatives, resetRelativesCache, getRelativesForProvider } from '../dal/relatives';
 import { RelativesProvider } from '../ui/providers/RelativesProvider';
 import { Suspense } from 'react';
 import DashboardShell from '../ui/dashboard/DashboardShell';
 
 async function RelativesLoader({ children }: { children: React.ReactNode }) {
-  const relatives = await getRelatives();
+  resetRelativesCache(); // reset cache on each request to see the effect of caching in getRelatives()
+  const relatives = await getRelativesForProvider();
+  const relativesTE = getRelativesTest();
+  
   return (
+   
     <RelativesProvider initialRelatives={relatives}>
+          <p>{relativesTE}</p>
       {children}
     </RelativesProvider>
   );

@@ -8,7 +8,6 @@ import {
   Revenue,
 } from './definitions';
 import { formatCurrency } from './utils';
-import { cacheLife, cacheTag } from 'next/cache';
 
 export async function fetchRevenue() {
   // 'use cache';
@@ -16,9 +15,6 @@ export async function fetchRevenue() {
   // cacheTag('revenue');
 
   try {
-    console.log('[DB HIT] fetchRevenue');
-    console.log('Fetching revenue data... AFTER 6 seconds delay');
-   
     await new Promise((resolve) => setTimeout(resolve, 6000)); //use this ONLY without "use cache"
     const data = await sql<Revenue[]>`SELECT * FROM revenue`;
     return data;
@@ -29,12 +25,11 @@ export async function fetchRevenue() {
 }
 
 export async function fetchLatestInvoices() {
-  'use cache';
-  cacheLife({ revalidate: 600 });
-  cacheTag('invoices');
+  // 'use cache';
+  // cacheLife({ revalidate: 600 });
+  // cacheTag('invoices');
 
   try {
-    console.log('[DB HIT] fetchLatestInvoices');
     const data = await sql<LatestInvoiceRaw[]>`
       SELECT invoices.amount, customers.name, customers.image_url, customers.email, invoices.id
       FROM invoices
@@ -54,12 +49,7 @@ export async function fetchLatestInvoices() {
 }
 
 export async function fetchCardData() {
-  'use cache';
-  cacheLife({ revalidate: 600 });
-  cacheTag('invoices', 'customers');
-
   try {
-    console.log('[DB HIT] fetchCardData');
     const invoiceCountPromise = sql`SELECT COUNT(*) FROM invoices`;
     const customerCountPromise = sql`SELECT COUNT(*) FROM customers`;
     const invoiceStatusPromise = sql`SELECT
