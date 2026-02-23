@@ -5,16 +5,16 @@ import {  getRelatives, resetRelativesCache, getRelativesForProvider } from '../
 import { RelativesProvider } from '../ui/providers/RelativesProvider';
 import { Suspense } from 'react';
 import DashboardShell from '../ui/dashboard/DashboardShell';
+import DateDisplay from '../ui/date-display';
 
 async function RelativesLoader({ children }: { children: React.ReactNode }) {
   resetRelativesCache(); // reset cache on each request to see the effect of caching in getRelatives()
   const relatives = await getRelativesForProvider();
-  const relativesTE = getRelativesTest();
-  
+  const relativesTE = await getRelativesTest();
+
   return (
-   
     <RelativesProvider initialRelatives={relatives}>
-          <p>{relativesTE}</p>
+          <DateDisplay value={relativesTE} label="Data in LAYOUT" />
       {children}
     </RelativesProvider>
   );

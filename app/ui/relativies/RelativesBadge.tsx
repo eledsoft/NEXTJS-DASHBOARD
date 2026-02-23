@@ -10,9 +10,11 @@ import Chip from '@mui/material/Chip';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
+import { useTranslation } from 'react-i18next';
 
 export default function RelativesBadge() {
     const { relatives } = useRelatives();
+    const { t } = useTranslation();
     const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
     const byRelationship = relatives.reduce<Record<string, number>>((acc, r) => {
@@ -36,7 +38,7 @@ export default function RelativesBadge() {
                     '&:hover': { bgcolor: '#c7d2fe' },
                 }}
             >
-                {relatives.length} parenti {open ? '▲' : '▼'}
+                {t('relatives.count', { count: relatives.length })} {open ? '▲' : '▼'}
             </Button>
 
             <Popover

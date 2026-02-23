@@ -9,16 +9,18 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-
-const links = [
-  { name: 'Home', href: '/dashboard', icon: Home },
-  { name: 'Invoices', href: '/dashboard/invoices', icon: Description },
-  { name: 'Customers', href: '/dashboard/customers', icon: Group },
-  { name: 'Relatives', href: '/dashboard/relatives', icon: People },
-];
+import { useTranslation } from 'react-i18next';
 
 export default function NavLinks() {
+  const { t } = useTranslation();
   const pathname = usePathname();
+
+  const links = [
+    { name: t('nav.home'), href: '/dashboard', icon: Home },
+    { name: t('nav.invoices'), href: '/dashboard/invoices', icon: Description },
+    { name: t('nav.customers'), href: '/dashboard/customers', icon: Group },
+    { name: t('nav.relatives'), href: '/dashboard/relatives', icon: People },
+  ];
 
   return (
     <>
@@ -27,7 +29,7 @@ export default function NavLinks() {
         const isActive = pathname === link.href;
         return (
           <ListItemButton
-            key={link.name}
+            key={link.href}
             component={Link}
             href={link.href}
             selected={isActive}

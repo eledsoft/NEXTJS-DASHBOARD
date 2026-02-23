@@ -5,6 +5,7 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import CalendarToday from '@mui/icons-material/CalendarToday';
 import { Revenue } from '@/app/lib/definitions';
+import { useTranslation } from 'react-i18next';
 
 export default function RevenueChartUI({
   revenue,
@@ -17,13 +18,15 @@ export default function RevenueChartUI({
   yAxisLabels: string[];
   topLabel: number;
 }) {
+  const { t } = useTranslation();
+
   return (
     <Box sx={{ width: '100%', gridColumn: { md: 'span 4' } }}>
       <Typography
         variant="h6"
         sx={{ mb: 2, fontFamily: 'var(--font-lusitana), serif', fontSize: { xs: '1.25rem', md: '1.5rem' } }}
       >
-        Recent Revenue
+        {t('dashboard.recentRevenue')}
       </Typography>
 
       <Paper elevation={0} sx={{ borderRadius: 3, bgcolor: 'grey.50', p: 2 }}>
@@ -82,7 +85,7 @@ export default function RevenueChartUI({
         <Box sx={{ display: 'flex', alignItems: 'center', pb: 1, pt: 3 }}>
           <CalendarToday sx={{ fontSize: 20, color: 'grey.500' }} />
           <Typography variant="body2" sx={{ ml: 1, color: 'grey.500' }}>
-            Last 12 months
+            {t('dashboard.last12Months')}
           </Typography>
         </Box>
       </Paper>

@@ -14,28 +14,30 @@ import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Alert from '@mui/material/Alert';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   initialRelatives: Relative[];
   userId: string;
 }
 
-const relationships = [
-  { value: 'padre', label: 'Padre' },
-  { value: 'madre', label: 'Madre' },
-  { value: 'fratello', label: 'Fratello' },
-  { value: 'sorella', label: 'Sorella' },
-  { value: 'figlio', label: 'Figlio' },
-  { value: 'figlia', label: 'Figlia' },
-  { value: 'nonno', label: 'Nonno' },
-  { value: 'nonna', label: 'Nonna' },
-  { value: 'zio', label: 'Zio' },
-  { value: 'zia', label: 'Zia' },
-  { value: 'cugino', label: 'Cugino' },
-  { value: 'cugina', label: 'Cugina' },
-];
-
 export default function FamilyTreeClient({ initialRelatives, userId }: Props) {
+  const { t } = useTranslation();
+
+  const relationships = [
+    { value: 'padre', label: t('relatives.father') },
+    { value: 'madre', label: t('relatives.mother') },
+    { value: 'fratello', label: t('relatives.brother') },
+    { value: 'sorella', label: t('relatives.sister') },
+    { value: 'figlio', label: t('relatives.son') },
+    { value: 'figlia', label: t('relatives.daughter') },
+    { value: 'nonno', label: t('relatives.grandfather') },
+    { value: 'nonna', label: t('relatives.grandmother') },
+    { value: 'zio', label: t('relatives.uncle') },
+    { value: 'zia', label: t('relatives.aunt') },
+    { value: 'cugino', label: t('relatives.cousinM') },
+    { value: 'cugina', label: t('relatives.cousinF') },
+  ];
   const [optimisticRelatives, addOptimisticRelative] = useOptimistic(
     initialRelatives,
     (state: Relative[], newRelative: Relative) => [...state, newRelative],
@@ -79,7 +81,7 @@ export default function FamilyTreeClient({ initialRelatives, userId }: Props) {
                     {person.name} {person.lastname}
                   </Typography>
                   <Typography variant="body2" color="text.secondary" sx={{ mt: 0.5 }}>
-                    {person.relationship} &bull; {person.age} anni
+                    {person.relationship} &bull; {person.age} {t('relatives.years')}
                   </Typography>
                 </Box>
                 <IconButton
@@ -100,7 +102,7 @@ export default function FamilyTreeClient({ initialRelatives, userId }: Props) {
       <Card variant="outlined">
         <CardContent>
           <Typography variant="h6" sx={{ mb: 2 }}>
-            Aggiungi un parente
+            {t('relatives.addRelative')}
           </Typography>
 
           {state?.message && (
@@ -114,7 +116,7 @@ export default function FamilyTreeClient({ initialRelatives, userId }: Props) {
               <Grid size={{ xs: 12, md: 6 }}>
                 <TextField
                   name="name"
-                  label="Nome"
+                  label={t('relatives.firstName')}
                   required
                   fullWidth
                   error={!!state?.errors?.name}
@@ -124,7 +126,7 @@ export default function FamilyTreeClient({ initialRelatives, userId }: Props) {
               <Grid size={{ xs: 12, md: 6 }}>
                 <TextField
                   name="lastname"
-                  label="Cognome"
+                  label={t('relatives.lastName')}
                   required
                   fullWidth
                   error={!!state?.errors?.lastname}
@@ -134,7 +136,7 @@ export default function FamilyTreeClient({ initialRelatives, userId }: Props) {
               <Grid size={{ xs: 12, md: 6 }}>
                 <TextField
                   name="age"
-                  label="Età"
+                  label={t('relatives.age')}
                   type="number"
                   required
                   fullWidth
@@ -146,7 +148,7 @@ export default function FamilyTreeClient({ initialRelatives, userId }: Props) {
               <Grid size={{ xs: 12, md: 6 }}>
                 <TextField
                   name="relationship"
-                  label="Relazione"
+                  label={t('relatives.relationship')}
                   select
                   required
                   fullWidth
@@ -169,7 +171,7 @@ export default function FamilyTreeClient({ initialRelatives, userId }: Props) {
               disabled={isPending}
               sx={{ mt: 2 }}
             >
-              {isPending ? 'Aggiunta in corso...' : 'Aggiungi parente'}
+              {isPending ? t('relatives.adding') : t('relatives.addButton')}
             </Button>
           </form>
         </CardContent>

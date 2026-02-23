@@ -1,10 +1,15 @@
 'use client';
-import { createTheme } from '@mui/material/styles';
+import { ardesiaThemeFactory } from '@ardesia/ardesia-ui-platform';
+import { grey } from "@mui/material/colors"
 
-const theme = createTheme({
-  typography: {
-    fontFamily: 'var(--font-roboto)',
-  },
-});
+export const pecofficeLightTheme = ardesiaThemeFactory({
+  themeMode: "light",
+  colorOptions: { primaryColor: "#02A17C", secondaryColor: grey[300] },
+})
 
-export default theme;
+export const pecofficeDarkTheme = ardesiaThemeFactory({
+  themeMode: "dark",
+  colorOptions: { primaryColor: "#1ED760", secondaryColor: grey[300] },
+})
+
+export default pecofficeLightTheme;

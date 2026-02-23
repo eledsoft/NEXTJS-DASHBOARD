@@ -1,0 +1,98 @@
+{
+  "nav": {
+    "home": "Home",
+    "invoices": "Fatture",
+    "customers": "Clienti",
+    "relatives": "Parenti"
+  },
+  "common": {
+    "save": "Salva",
+    "cancel": "Annulla",
+    "delete": "Elimina",
+    "edit": "Modifica",
+    "search": "Cerca",
+    "loading": "Caricamento...",
+    "paid": "Pagato",
+    "pending": "In attesa",
+    "email": "Email",
+    "name": "Nome",
+    "password": "Password"
+  },
+  "dashboard": {
+    "title": "Cruscotto",
+    "collected": "Incassato",
+    "pending": "In attesa",
+    "totalInvoices": "Fatture totali",
+    "totalCustomers": "Clienti totali",
+    "recentRevenue": "Entrate recenti",
+    "last12Months": "Ultimi 12 mesi",
+    "latestInvoices": "Ultime fatture",
+    "updatedJustNow": "Aggiornato adesso"
+  },
+  "login": {
+    "title": "Effettua il login per continuare.",
+    "emailPlaceholder": "Inserisci il tuo indirizzo email",
+    "passwordPlaceholder": "Inserisci la password",
+    "submit": "Accedi"
+  },
+  "invoices": {
+    "title": "Fatture",
+    "searchPlaceholder": "Cerca fatture...",
+    "createInvoice": "Crea fattura",
+    "editInvoice": "Modifica fattura",
+    "chooseCustomer": "Scegli cliente",
+    "selectCustomer": "Seleziona un cliente",
+    "chooseAmount": "Scegli un importo",
+    "enterAmount": "Inserisci importo in EUR",
+    "setStatus": "Imposta lo stato della fattura",
+    "creating": "Creazione in corso...",
+    "updating": "Aggiornamento in corso...",
+    "customer": "Cliente",
+    "amount": "Importo",
+    "date": "Data",
+    "status": "Stato"
+  },
+  "customers": {
+    "title": "Clienti",
+    "searchPlaceholder": "Cerca clienti...",
+    "totalInvoices": "Fatture totali",
+    "totalPending": "Totale in attesa",
+    "totalPaid": "Totale pagato",
+    "invoicesCount": "{{count}} fatture"
+  },
+  "relatives": {
+    "title": "La mia famiglia",
+    "overview": "Panoramica",
+    "registered": "Hai {{count}} parenti registrati",
+    "count": "{{count}} parenti",
+    "yourRelatives": "I tuoi parenti",
+    "addRelative": "Aggiungi un parente",
+    "firstName": "Nome",
+    "lastName": "Cognome",
+    "age": "Età",
+    "years": "anni",
+    "relationship": "Relazione",
+    "adding": "Aggiunta in corso...",
+    "addButton": "Aggiungi parente",
+    "father": "Padre",
+    "mother": "Madre",
+    "brother": "Fratello",
+    "sister": "Sorella",
+    "son": "Figlio",
+    "daughter": "Figlia",
+    "grandfather": "Nonno",
+    "grandmother": "Nonna",
+    "uncle": "Zio",
+    "aunt": "Zia",
+    "cousinM": "Cugino",
+    "cousinF": "Cugina"
+  },
+  "user": {
+    "profile": "Profilo",
+    "language": "Lingua",
+    "theme": "Tema",
+    "themeLight": "Chiaro",
+    "themeDark": "Scuro",
+    "close": "Chiudi"
+  }
+}

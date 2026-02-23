@@ -30,12 +30,14 @@ import {
   Person,
 } from '@mui/icons-material';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export default function CreateInvoiceForm({
   customers,
 }: {
   customers: CustomerField[];
 }) {
+  const { t } = useTranslation();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
 
@@ -80,7 +82,7 @@ export default function CreateInvoiceForm({
       <Paper elevation={0} sx={{ p: { xs: 2, md: 3 }, bgcolor: 'grey.50', borderRadius: 2 }}>
         {/* Customer Name */}
         <FormControl fullWidth error={!!errors.customerId} sx={{ mb: 3 }}>
-          <InputLabel id="customer-label">Choose customer</InputLabel>
+          <InputLabel id="customer-label">{t('invoices.chooseCustomer')}</InputLabel>
           <Controller
             name="customerId"
             control={control}
@@ -88,7 +90,7 @@ export default function CreateInvoiceForm({
               <Select
                 {...field}
                 labelId="customer-label"
-                label="Choose customer"
+                label={t('invoices.chooseCustomer')}
                 startAdornment={
                   <InputAdornment position="start">
                     <Person sx={{ color: 'text.secondary' }} />
@@ -96,7 +98,7 @@ export default function CreateInvoiceForm({
                 }
               >
                 <MenuItem value="" disabled>
-                  Select a customer
+                  {t('invoices.selectCustomer')}
                 </MenuItem>
                 {customers.map((customer) => (
                   <MenuItem key={customer.id} value={customer.id}>
@@ -119,7 +121,7 @@ export default function CreateInvoiceForm({
             render={({ field }) => (
               <TextField
                 {...field}
-                label="Choose an amount"
+                label={t('invoices.chooseAmount')}
                 type="number"
                 inputProps={{
                   step: '0.01',
@@ -132,7 +134,7 @@ export default function CreateInvoiceForm({
                     </InputAdornment>
                   ),
                 }}
-                placeholder="Enter USD amount"
+                placeholder={t('invoices.enterAmount')}
                 error={!!errors.amount}
                 helperText={errors.amount?.message}
                 onChange={(e) => field.onChange(parseFloat(e.target.value))}
@@ -144,7 +146,7 @@ export default function CreateInvoiceForm({
         {/* Invoice Status */}
         <FormControl component="fieldset" error={!!errors.status} sx={{ width: '100%' }}>
           <Typography variant="body2" fontWeight="medium" sx={{ mb: 1 }}>
-            Set the invoice status
+            {t('invoices.setStatus')}
           </Typography>
           <Paper
             variant="outlined"
@@ -175,7 +177,7 @@ export default function CreateInvoiceForm({
                         }}
                       >
                         <Typography variant="caption" fontWeight="medium" color="text.secondary">
-                          Pending
+                          {t('common.pending')}
                         </Typography>
                         <Schedule sx={{ fontSize: 16, color: 'text.secondary' }} />
                       </Box>
@@ -197,7 +199,7 @@ export default function CreateInvoiceForm({
                         }}
                       >
                         <Typography variant="caption" fontWeight="medium" color="white">
-                          Paid
+                          {t('common.paid')}
                         </Typography>
                         <CheckCircle sx={{ fontSize: 16, color: 'white' }} />
                       </Box>
@@ -235,7 +237,7 @@ export default function CreateInvoiceForm({
             },
           }}
         >
-          Cancel
+          {t('common.cancel')}
         </Button>
         <Button
           type="submit"
@@ -243,7 +245,7 @@ export default function CreateInvoiceForm({
           disabled={isSubmitting}
           startIcon={isSubmitting ? <CircularProgress size={16} /> : null}
         >
-          {isSubmitting ? 'Creating...' : 'Create Invoice'}
+          {isSubmitting ? t('invoices.creating') : t('invoices.createInvoice')}
         </Button>
       </Box>
     </Box>

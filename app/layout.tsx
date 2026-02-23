@@ -2,11 +2,9 @@ import { inter, lusitana } from './ui/fonts';
 import { Metadata } from 'next';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 // import ThemeRegistry from './ui/providers/ThemeRegistry';
-
 import { Roboto } from 'next/font/google';
-import { ThemeProvider } from '@mui/material/styles';
-import theme from './theme';
-
+import ThemeToggleProvider from './ui/providers/ThemeToggleProvider';
+import I18nProvider from './i18n/I18nProvider';
 
 const roboto = Roboto({
   weight: ['300', '400', '500', '700'],
@@ -33,10 +31,11 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${lusitana.variable}`}>
       <body>
         <AppRouterCacheProvider>
-                    {/* <InitColorSchemeScript attribute="data" /> */}
-          <ThemeProvider theme={theme}>
+          <ThemeToggleProvider>
+            <I18nProvider>
               {children}
-            </ThemeProvider>
+            </I18nProvider>
+          </ThemeToggleProvider>
         </AppRouterCacheProvider>
       </body>
     </html>

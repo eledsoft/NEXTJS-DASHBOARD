@@ -3,13 +3,16 @@
 import Chip from '@mui/material/Chip';
 import CheckCircle from '@mui/icons-material/CheckCircle';
 import Schedule from '@mui/icons-material/Schedule';
+import { useTranslation } from 'react-i18next';
 
 export default function InvoiceStatus({ status }: { status: string }) {
+  const { t } = useTranslation();
+
   if (status === 'paid') {
     return (
       <Chip
         icon={<CheckCircle />}
-        label="Paid"
+        label={t('common.paid')}
         color="success"
         size="small"
         sx={{ fontWeight: 500 }}
@@ -20,7 +23,7 @@ export default function InvoiceStatus({ status }: { status: string }) {
   return (
     <Chip
       icon={<Schedule />}
-      label="Pending"
+      label={t('common.pending')}
       size="small"
       sx={{
         bgcolor: 'grey.100',

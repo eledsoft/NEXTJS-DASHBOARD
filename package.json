@@ -8,6 +8,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+     "@ardesia/ardesia-ui-platform": "^0.1.12",
     "@emotion/cache": "^11.14.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",

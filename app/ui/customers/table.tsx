@@ -12,21 +12,24 @@ import TableRow from '@mui/material/TableRow';
 import Image from 'next/image';
 import Search from '@/app/ui/search';
 import { FormattedCustomersTable } from '@/app/lib/definitions';
+import { useTranslation } from 'react-i18next';
 
 export default function CustomersTable({
   customers,
 }: {
   customers: FormattedCustomersTable[];
 }) {
+  const { t } = useTranslation();
+
   return (
     <Box sx={{ width: '100%' }}>
       <Typography
         variant="h5"
         sx={{ mb: 4, fontFamily: 'var(--font-lusitana), serif', fontSize: { xs: '1.25rem', md: '1.5rem' } }}
       >
-        Customers
+        {t('customers.title')}
       </Typography>
-      <Search placeholder="Search customers..." />
+      <Search placeholder={t('customers.searchPlaceholder')} />
       <Box sx={{ mt: 3 }}>
         <Paper elevation={0} sx={{ borderRadius: 2, bgcolor: 'grey.50', p: 1, pt: { md: 0 }, overflow: 'hidden' }}>
           {/* Mobile view */}
@@ -52,16 +55,16 @@ export default function CustomersTable({
                 </Box>
                 <Box sx={{ display: 'flex', width: '100%', alignItems: 'center', borderBottom: '1px solid', borderColor: 'grey.200', py: 2.5 }}>
                   <Box sx={{ width: '50%' }}>
-                    <Typography variant="caption">Pending</Typography>
+                    <Typography variant="caption">{t('common.pending')}</Typography>
                     <Typography variant="body2" fontWeight={500}>{customer.total_pending}</Typography>
                   </Box>
                   <Box sx={{ width: '50%' }}>
-                    <Typography variant="caption">Paid</Typography>
+                    <Typography variant="caption">{t('common.paid')}</Typography>
                     <Typography variant="body2" fontWeight={500}>{customer.total_paid}</Typography>
                   </Box>
                 </Box>
                 <Box sx={{ pt: 2 }}>
-                  <Typography variant="body2">{customer.total_invoices} invoices</Typography>
+                  <Typography variant="body2">{t('customers.invoicesCount', { count: customer.total_invoices })}</Typography>
                 </Box>
               </Paper>
             ))}
@@ -72,11 +75,11 @@ export default function CustomersTable({
             <Table sx={{ minWidth: '100%' }}>
               <TableHead>
                 <TableRow sx={{ bgcolor: 'grey.50' }}>
-                  <TableCell sx={{ fontWeight: 500, pl: 3 }}>Name</TableCell>
-                  <TableCell sx={{ fontWeight: 500 }}>Email</TableCell>
-                  <TableCell sx={{ fontWeight: 500 }}>Total Invoices</TableCell>
-                  <TableCell sx={{ fontWeight: 500 }}>Total Pending</TableCell>
-                  <TableCell sx={{ fontWeight: 500 }}>Total Paid</TableCell>
+                  <TableCell sx={{ fontWeight: 500, pl: 3 }}>{t('common.name')}</TableCell>
+                  <TableCell sx={{ fontWeight: 500 }}>{t('common.email')}</TableCell>
+                  <TableCell sx={{ fontWeight: 500 }}>{t('customers.totalInvoices')}</TableCell>
+                  <TableCell sx={{ fontWeight: 500 }}>{t('customers.totalPending')}</TableCell>
+                  <TableCell sx={{ fontWeight: 500 }}>{t('customers.totalPaid')}</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody sx={{ '& td': { bgcolor: 'white' } }}>

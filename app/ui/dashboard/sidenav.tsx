@@ -6,7 +6,7 @@ import { signOut } from '@/auth';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { grey } from '@mui/material/colors';
-import { Avatar } from '@mui/material';
+import AvatarDialog from '@/app/ui/dashboard/avatar-dialog';
 import { auth } from '@/auth';
 import { getRelatives, verifySession } from '@/app/dal/relatives';
 // import Loading from '@/app/dashboard/(overview)/loading';
@@ -26,7 +26,8 @@ export default async function SideNav() {
   }
 
 
-  const avatar = null; // Replace with actual avatar component or image source if available
+  const userName = session?.user?.name;
+  const userEmail = session?.user?.email;
   return (
     <Box
       sx={{
@@ -52,7 +53,7 @@ export default async function SideNav() {
           placeItems: "center",
         }}
       >
-        {avatar ?? <Avatar variant="square" sx={{ height: "100%", width: "100%" }} >{session?.user?.name?.charAt(0)}</Avatar>}
+        <AvatarDialog userName={userName} userEmail={userEmail} />
       </Box>
       <Box
         sx={{

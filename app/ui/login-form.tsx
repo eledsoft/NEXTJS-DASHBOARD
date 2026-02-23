@@ -13,8 +13,10 @@ import ErrorOutline from '@mui/icons-material/ErrorOutline';
 import { useActionState } from 'react';
 import { authenticate } from '@/app/lib/actionsMui';
 import { useSearchParams } from 'next/navigation';
+import { useTranslation } from 'react-i18next';
 
 export default function LoginForm() {
+  const { t } = useTranslation();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get('callbackUrl') || '/dashboard';
   const [errorMessage, formAction, isPending] = useActionState(
@@ -29,15 +31,15 @@ export default function LoginForm() {
           variant="h5"
           sx={{ mb: 1.5, fontFamily: 'var(--font-lusitana), serif' }}
         >
-          Please log in to continue.
+          {t('login.title')}
         </Typography>
         <Box sx={{ width: '100%' }}>
           <TextField
             id="email"
             type="email"
             name="email"
-            label="Email"
-            placeholder="Enter your email address"
+            label={t('common.email')}
+            placeholder={t('login.emailPlaceholder')}
             required
             fullWidth
             size="small"
@@ -56,8 +58,8 @@ export default function LoginForm() {
             id="password"
             type="password"
             name="password"
-            label="Password"
-            placeholder="Enter password"
+            label={t('common.password')}
+            placeholder={t('login.passwordPlaceholder')}
             required
             fullWidth
             size="small"
@@ -85,7 +87,7 @@ export default function LoginForm() {
           endIcon={<ArrowForward />}
           sx={{ mt: 2, textTransform: 'none', height: 40 }}
         >
-          Log in
+          {t('login.submit')}
         </MuiButton>
         <Box
           sx={{ display: 'flex', height: 32, alignItems: 'flex-end', gap: 0.5 }}

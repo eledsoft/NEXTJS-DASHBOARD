@@ -3,12 +3,13 @@ import RevenueChart from '@/app/ui/dashboard/revenue-chart';
 import LatestInvoices from '@/app/ui/dashboard/latest-invoices';
 import { Suspense } from 'react';
 import { LatestInvoicesSkeleton, RevenueChartSkeleton, CardsSkeleton } from '@/app/ui/skeletons';
+import { t } from '@/app/i18n/server';
 
 export default async function Page() {
   return (
     <main>
       <h1 style={{ fontFamily: 'var(--font-lusitana), serif', marginBottom: 16, fontSize: '1.5rem' }}>
-        Dashboard
+        {t('dashboard.title')}
       </h1>
       <div style={{ display: 'grid', gap: 24, gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))' }}>
         <Suspense fallback={<CardsSkeleton />}>

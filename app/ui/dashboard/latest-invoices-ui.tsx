@@ -7,19 +7,22 @@ import Divider from '@mui/material/Divider';
 import Refresh from '@mui/icons-material/Refresh';
 import Image from 'next/image';
 import { LatestInvoice } from '@/app/lib/definitions';
+import { useTranslation } from 'react-i18next';
 
 export default function LatestInvoicesUI({
   latestInvoices,
 }: {
   latestInvoices: LatestInvoice[];
 }) {
+  const { t } = useTranslation();
+
   return (
     <Box sx={{ display: 'flex', width: '100%', flexDirection: 'column', gridColumn: { md: 'span 4' } }}>
       <Typography
         variant="h6"
         sx={{ mb: 2, fontFamily: 'var(--font-lusitana), serif', fontSize: { xs: '1.25rem', md: '1.5rem' } }}
       >
-        Latest Invoices
+        {t('dashboard.latestInvoices')}
       </Typography>
       <Paper elevation={0} sx={{ display: 'flex', flexGrow: 1, flexDirection: 'column', justifyContent: 'space-between', borderRadius: 3, bgcolor: 'grey.50', p: 2 }}>
         <Box sx={{ bgcolor: 'white', px: 3 }}>
@@ -75,7 +78,7 @@ export default function LatestInvoicesUI({
         <Box sx={{ display: 'flex', alignItems: 'center', pb: 1, pt: 3 }}>
           <Refresh sx={{ fontSize: 20, color: 'grey.500' }} />
           <Typography variant="body2" sx={{ ml: 1, color: 'grey.500' }}>
-            Updated just now
+            {t('dashboard.updatedJustNow')}
           </Typography>
         </Box>
       </Paper>

@@ -1,0 +1,98 @@
+{
+  "nav": {
+    "home": "Home",
+    "invoices": "Invoices",
+    "customers": "Customers",
+    "relatives": "Relatives"
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "search": "Search",
+    "loading": "Loading...",
+    "paid": "Paid",
+    "pending": "Pending",
+    "email": "Email",
+    "name": "Name",
+    "password": "Password"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "collected": "Collected",
+    "pending": "Pending",
+    "totalInvoices": "Total Invoices",
+    "totalCustomers": "Total Customers",
+    "recentRevenue": "Recent Revenue",
+    "last12Months": "Last 12 months",
+    "latestInvoices": "Latest Invoices",
+    "updatedJustNow": "Updated just now"
+  },
+  "login": {
+    "title": "Please log in to continue.",
+    "emailPlaceholder": "Enter your email address",
+    "passwordPlaceholder": "Enter password",
+    "submit": "Log in"
+  },
+  "invoices": {
+    "title": "Invoices",
+    "searchPlaceholder": "Search invoices...",
+    "createInvoice": "Create Invoice",
+    "editInvoice": "Edit Invoice",
+    "chooseCustomer": "Choose customer",
+    "selectCustomer": "Select a customer",
+    "chooseAmount": "Choose an amount",
+    "enterAmount": "Enter USD amount",
+    "setStatus": "Set the invoice status",
+    "creating": "Creating...",
+    "updating": "Updating...",
+    "customer": "Customer",
+    "amount": "Amount",
+    "date": "Date",
+    "status": "Status"
+  },
+  "customers": {
+    "title": "Customers",
+    "searchPlaceholder": "Search customers...",
+    "totalInvoices": "Total Invoices",
+    "totalPending": "Total Pending",
+    "totalPaid": "Total Paid",
+    "invoicesCount": "{{count}} invoices"
+  },
+  "relatives": {
+    "title": "My Family",
+    "overview": "Overview",
+    "registered": "You have {{count}} registered relatives",
+    "count": "{{count}} relatives",
+    "yourRelatives": "Your relatives",
+    "addRelative": "Add a relative",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "age": "Age",
+    "years": "years",
+    "relationship": "Relationship",
+    "adding": "Adding...",
+    "addButton": "Add relative",
+    "father": "Father",
+    "mother": "Mother",
+    "brother": "Brother",
+    "sister": "Sister",
+    "son": "Son",
+    "daughter": "Daughter",
+    "grandfather": "Grandfather",
+    "grandmother": "Grandmother",
+    "uncle": "Uncle",
+    "aunt": "Aunt",
+    "cousinM": "Cousin (M)",
+    "cousinF": "Cousin (F)"
+  },
+  "user": {
+    "profile": "Profile",
+    "language": "Language",
+    "theme": "Theme",
+    "themeLight": "Light",
+    "themeDark": "Dark",
+    "close": "Close"
+  }
+}

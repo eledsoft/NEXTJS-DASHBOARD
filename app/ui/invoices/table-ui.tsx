@@ -14,12 +14,15 @@ import { UpdateInvoice, DeleteInvoice } from '@/app/ui/invoices/buttons';
 import InvoiceStatus from '@/app/ui/invoices/status';
 import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
 import { InvoicesTable as InvoicesTableType } from '@/app/lib/definitions';
+import { useTranslation } from 'react-i18next';
 
 export default function InvoicesTableUI({
   invoices,
 }: {
   invoices: InvoicesTableType[];
 }) {
+  const { t } = useTranslation();
+
   return (
     <Box sx={{ mt: 3 }}>
       <Paper elevation={0} sx={{ borderRadius: 2, bgcolor: 'grey.50', p: 1, pt: { md: 0 } }}>
@@ -66,12 +69,12 @@ export default function InvoicesTableUI({
           <Table sx={{ minWidth: '100%' }}>
             <TableHead>
               <TableRow>
-                <TableCell sx={{ fontWeight: 500, pl: 3 }}>Customer</TableCell>
-                <TableCell sx={{ fontWeight: 500 }}>Email</TableCell>
-                <TableCell sx={{ fontWeight: 500 }}>Amount</TableCell>
-                <TableCell sx={{ fontWeight: 500 }}>Date</TableCell>
-                <TableCell sx={{ fontWeight: 500 }}>Status</TableCell>
-                <TableCell sx={{ fontWeight: 500 }} align="right">Edit</TableCell>
+                <TableCell sx={{ fontWeight: 500, pl: 3 }}>{t('invoices.customer')}</TableCell>
+                <TableCell sx={{ fontWeight: 500 }}>{t('common.email')}</TableCell>
+                <TableCell sx={{ fontWeight: 500 }}>{t('invoices.amount')}</TableCell>
+                <TableCell sx={{ fontWeight: 500 }}>{t('invoices.date')}</TableCell>
+                <TableCell sx={{ fontWeight: 500 }}>{t('invoices.status')}</TableCell>
+                <TableCell sx={{ fontWeight: 500 }} align="right">{t('common.edit')}</TableCell>
               </TableRow>
             </TableHead>
             <TableBody sx={{ bgcolor: 'white' }}>

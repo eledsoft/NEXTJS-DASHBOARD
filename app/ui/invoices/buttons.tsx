@@ -7,8 +7,10 @@ import MuiButton from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Link from 'next/link';
 import { deleteInvoice } from '@/app/lib/actions';
+import { useTranslation } from 'react-i18next';
 
 export function CreateInvoice() {
+  const { t } = useTranslation();
   return (
     <MuiButton
       component={Link}
@@ -22,7 +24,7 @@ export function CreateInvoice() {
         height: 40,
       }}
     >
-      Create Invoice
+      {t('invoices.createInvoice')}
     </MuiButton>
   );
 }

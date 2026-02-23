@@ -22,7 +22,7 @@ import {
   Typography,
   InputAdornment,
   CircularProgress,
-} from '@mui/material'; 
+} from '@mui/material';
 import {
   CheckCircle,
   Schedule,
@@ -31,6 +31,7 @@ import {
 } from '@mui/icons-material';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useTranslation } from 'react-i18next';
 
 export default function EditInvoiceForm({
   invoice,
@@ -40,6 +41,7 @@ export default function EditInvoiceForm({
   customers: CustomerField[];
 }) {
   const router = useRouter();
+  const { t } = useTranslation();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
 
@@ -48,7 +50,7 @@ export default function EditInvoiceForm({
     handleSubmit,
     formState: { errors },
   } = useForm<InvoiceFormData>({
-    resolver: zodResolver(invoiceFormSchema), // ✅ Usa lo schema condiviso
+    resolver: zodResolver(invoiceFormSchema),
     defaultValues: {
       customerId: invoice.customer_id,
       amount: invoice.amount,
@@ -84,7 +86,7 @@ export default function EditInvoiceForm({
       <Paper elevation={0} sx={{ p: { xs: 2, md: 3 }, bgcolor: 'grey.50', borderRadius: 2 }}>
         {/* Customer Name */}
         <FormControl fullWidth error={!!errors.customerId} sx={{ mb: 3 }}>
-          <InputLabel id="customer-label">Choose customer</InputLabel>
+          <InputLabel id="customer-label">{t('invoices.chooseCustomer')}</InputLabel>
           <Controller
             name="customerId"
             control={control}
@@ -92,7 +94,7 @@ export default function EditInvoiceForm({
               <Select
                 {...field}
                 labelId="customer-label"
-                label="Choose customer"
+                label={t('invoices.chooseCustomer')}
                 startAdornment={
                   <InputAdornment position="start">
                     <Person sx={{ color: 'text.secondary' }} />
@@ -100,7 +102,7 @@ export default function EditInvoiceForm({
                 }
               >
                 <MenuItem value="" disabled>
-                  Select a customer
+                  {t('invoices.selectCustomer')}
                 </MenuItem>
                 {customers.map((customer) => (
                   <MenuItem key={customer.id} value={customer.id}>
@@ -123,7 +125,7 @@ export default function EditInvoiceForm({
             render={({ field }) => (
               <TextField
                 {...field}
-                label="Choose an amount"
+                label={t('invoices.chooseAmount')}
                 type="number"
                 inputProps={{
                   step: '0.01',
@@ -136,7 +138,7 @@ export default function EditInvoiceForm({
                     </InputAdornment>
                   ),
                 }}
-                placeholder="Enter USD amount"
+                placeholder={t('invoices.enterAmount')}
                 error={!!errors.amount}
                 helperText={errors.amount?.message}
                 onChange={(e) => field.onChange(parseFloat(e.target.value))}
@@ -148,7 +150,7 @@ export default function EditInvoiceForm({
         {/* Invoice Status */}
         <FormControl component="fieldset" error={!!errors.status} sx={{ width: '100%' }}>
           <Typography variant="body2" fontWeight="medium" sx={{ mb: 1 }}>
-            Set the invoice status
+            {t('invoices.setStatus')}
           </Typography>
           <Paper
             variant="outlined"
@@ -179,7 +181,7 @@ export default function EditInvoiceForm({
                         }}
                       >
                         <Typography variant="caption" fontWeight="medium" color="text.secondary">
-                          Pending
+                          {t('common.pending')}
                         </Typography>
                         <Schedule sx={{ fontSize: 16, color: 'text.secondary' }} />
                       </Box>
@@ -201,7 +203,7 @@ export default function EditInvoiceForm({
                         }}
                       >
                         <Typography variant="caption" fontWeight="medium" color="white">
-                          Paid
+                          {t('common.paid')}
                         </Typography>
                         <CheckCircle sx={{ fontSize: 16, color: 'white' }} />
                       </Box>
@@ -239,7 +241,7 @@ export default function EditInvoiceForm({
             },
           }}
         >
-          Cancel
+          {t('common.cancel')}
         </Button>
         <Button
           type="submit"
@@ -247,7 +249,7 @@ export default function EditInvoiceForm({
           disabled={isSubmitting}
           startIcon={isSubmitting ? <CircularProgress size={16} /> : null}
         >
-          {isSubmitting ? 'Updating...' : 'Edit Invoice'}
+          {isSubmitting ? t('invoices.updating') : t('invoices.editInvoice')}
         </Button>
       </Box>
     </Box>
